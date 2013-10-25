@@ -8862,12 +8862,22 @@ ACMD_FUNC(font)
 	return 0;
 }
 
+/*==========================================
+ * @ping command that request the time delay
+ * between user and server
+ *                          by: Mano de Dios
+ *------------------------------------------*/
+/*ACMD_FUNC(ping)
+{
+}*/
+
 
 /*==========================================
  * atcommand_info[] structure definition
  *------------------------------------------*/
 
 AtCommandInfo atcommand_info[] = {
+//	{ "ping",				1,1,	  atcommand_ping },
 	{ "rura",              40,40,     atcommand_mapmove },
 	{ "warp",              40,40,     atcommand_mapmove },
 	{ "mapmove",           40,40,     atcommand_mapmove }, // + /mm

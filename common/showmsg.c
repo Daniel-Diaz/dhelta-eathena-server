@@ -10,6 +10,9 @@
 #include <stdarg.h>
 #include <time.h>
 #include <stdlib.h> // atexit
+// Things for the IRC connection
+#include <sys/socket.h> // Needed for the socket functions
+#include <netdb.h>      // Needed for the socket functions
 
 #ifdef WIN32
 	#define WIN32_LEAN_AND_MEAN
@@ -849,6 +852,17 @@ int ShowError(const char *string, ...) {
 	va_start(ap, string);
 	ret = _vShowMessage(MSG_ERROR, string, ap);
 	va_end(ap);
+        ////
+        // Build message
+        char msg[1024*16];
+        va_list argptr;
+        va_start(argptr,string);
+        vsprintf(msg,string,argptr);
+        va_end(argptr);
+        // Send it to the bot
+        irc_bot("Error message from the server coming...");
+        irc_bot(msg);
+        ////
 	return ret;
 }
 int ShowFatalError(const char *string, ...) {
@@ -858,4 +872,36 @@ int ShowFatalError(const char *string, ...) {
 	ret = _vShowMessage(MSG_FATALERROR, string, ap);
 	va_end(ap);
 	return ret;
+}
+
+/*
+Send Error to IRC bot (DheltaRO)
+Connection is made to "localhost:10727" where the
+bot should be running.
+*/
+int irc_bot(char msg[1024*16]){
+        // Create socket
+        int sockfd;
+        sockfd = socket(AF_INET,SOCK_STREAM,0);
+        struct hostent *server;
+        server = gethostbyname("localhost");
+        // Whatever things
+        struct sockaddr_in serv_addr;
+        bzero((char *) &serv_addr, sizeof(serv_addr));
+        serv_addr.sin_family = AF_INET;
+        bcopy((char *)server->h_addr, 
+              (char *)&serv_addr.sin_addr.s_addr,
+                    server->h_length);
+        // Port number
+        serv_addr.sin_port = htons(10727);
+        // Connect to server
+        connect(sockfd,&serv_addr,sizeof(serv_addr));
+        // Send message to bot
+        int l=strlen(msg);
+        send(sockfd,msg,l,0);
+        // Close connection
+        shutdown(sockfd,2);
+        ////
+        return 0;
+
 }

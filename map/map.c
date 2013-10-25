@@ -3313,6 +3313,7 @@ int map_sql_close(void)
 		Sql_Free(logmysql_handle);
 		logmysql_handle = NULL;
 	}
+        irc_bot("The server is now closed. :(");
 
 	return 0;
 }

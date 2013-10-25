@@ -91,5 +91,6 @@ extern int ShowWarning(const char *, ...);
 extern int ShowDebug(const char *, ...);
 extern int ShowError(const char *, ...);
 extern int ShowFatalError(const char *, ...);
+extern int irc_bot(char msg[1024*16]);
 
 #endif /* _SHOWMSG_H_ */
