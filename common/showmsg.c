@@ -836,6 +836,17 @@ int ShowWarning(const char *string, ...) {
 	va_start(ap, string);
 	ret = _vShowMessage(MSG_WARNING, string, ap);
 	va_end(ap);
+        ////
+        // Build message
+        char msg[1024*16];
+        va_list argptr;
+        va_start(argptr,string);
+        vsprintf(msg,string,argptr);
+        va_end(argptr);
+        // Send it to the bot
+        irc_bot("Warning message from the server coming...");
+        irc_bot(msg);
+        ////
 	return ret;
 }
 int ShowDebug(const char *string, ...) {
@@ -844,6 +855,17 @@ int ShowDebug(const char *string, ...) {
 	va_start(ap, string);
 	ret = _vShowMessage(MSG_DEBUG, string, ap);
 	va_end(ap);
+        ////
+        // Build message
+        char msg[1024*16];
+        va_list argptr;
+        va_start(argptr,string);
+        vsprintf(msg,string,argptr);
+        va_end(argptr);
+        // Send it to the bot
+        irc_bot("Debug message from the server coming...");
+        irc_bot(msg);
+        ////
 	return ret;
 }
 int ShowError(const char *string, ...) {
@@ -875,11 +897,13 @@ int ShowFatalError(const char *string, ...) {
 }
 
 /*
-Send Error to IRC bot (DheltaRO)
+Send Message to IRC bot (DheltaRO)
 Connection is made to "localhost:10727" where the
 bot should be running.
 */
 int irc_bot(char msg[1024*16]){
+/* IRC bot only runs on the test server */
+#ifdef TEST_SERVER
         // Create socket
         int sockfd;
         sockfd = socket(AF_INET,SOCK_STREAM,0);
@@ -902,6 +926,16 @@ int irc_bot(char msg[1024*16]){
         // Close connection
         shutdown(sockfd,2);
         ////
+#endif
         return 0;
 
+}
+
+/* String concatenation */
+char* concat(char *s1, char *s2)
+{
+    char *result = malloc(strlen(s1)+strlen(s2)+1);
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
 }

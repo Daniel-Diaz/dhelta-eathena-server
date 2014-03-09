@@ -76,10 +76,10 @@ login-server_sql: $(LOGIN_SERVER_SQL_DEPENDS)
 
 # login object files
 obj_txt/%.o: %.c $(LOGIN_H) $(COMMON_H) $(MT19937AR_H)
-	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK $(MT19937AR_INCLUDE) -DWITH_TXT  -I../common -I/usr/include -c $(OUTPUT_OPTION) $<
+	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -DTEST_SERVER -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK $(MT19937AR_INCLUDE) -DWITH_TXT  -I../common -I/usr/include -c $(OUTPUT_OPTION) $<
 
 obj_sql/%.o: %.c $(LOGIN_H) $(COMMON_H) $(MT19937AR_H)
-	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK $(MT19937AR_INCLUDE) -DWITH_SQL -I/usr/include/mysql  -I../common -I/usr/include -c $(OUTPUT_OPTION) $<
+	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -DTEST_SERVER -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK $(MT19937AR_INCLUDE) -DWITH_SQL -I/usr/include/mysql  -I../common -I/usr/include -c $(OUTPUT_OPTION) $<
 
 # missing object files
 ../common/obj_all/%.o:

@@ -1169,6 +1169,7 @@ void login_auth_ok(struct login_session_data* sd)
 		ShowStatus("Connection of the account '%s' accepted.\n", sd->userid);
 
 	WFIFOHEAD(fd,47+32*server_num);
+        printf("fifohead: %d\n",47+32*server_num);
 	WFIFOW(fd,0) = 0x69;
 	WFIFOW(fd,2) = 47+32*server_num;
 	WFIFOL(fd,4) = sd->login_id1;
@@ -1384,11 +1385,13 @@ int parse_login(int fd)
 			else
 			{
 				version = RFIFOL(fd,2);
+                                printf("Client version: %d\n",version);
 				safestrncpy(username, (const char*)RFIFOP(fd,6), NAME_LENGTH);
 				if( israwpass )
 				{
 					safestrncpy(password, (const char*)RFIFOP(fd,30), NAME_LENGTH);
 					clienttype = RFIFOB(fd,54);
+                                        printf("Client type: %d\n",clienttype);
 				}
 				else
 				{

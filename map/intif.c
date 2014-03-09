@@ -169,6 +169,12 @@ int intif_broadcast(const char* mes, int len, int type)
 	return 0;
 }
 
+// DheltaRO. Easy broadcast function.
+void easy_broadcast(const char* mes)
+{
+        intif_broadcast(mes,strlen(mes)+1,0);
+}
+
 int intif_broadcast2(const char* mes, int len, unsigned long fontColor, short fontType, short fontSize, short fontAlign, short fontY)
 {
 	// Send to the local players

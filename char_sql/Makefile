@@ -58,7 +58,7 @@ obj_sql:
 	-mkdir obj_sql
 
 obj_sql/%.o: %.c $(CHAR_H) $(COMMON_H) $(COMMON_SQL_H) $(MT19937AR_H)
-	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK $(MT19937AR_INCLUDE) -I/usr/include/mysql  -I../common -I/usr/include -c $(OUTPUT_OPTION) $<
+	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -DTEST_SERVER -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK $(MT19937AR_INCLUDE) -I/usr/include/mysql  -I../common -I/usr/include -c $(OUTPUT_OPTION) $<
 
 # missing object files
 ../common/obj_all/%.o:

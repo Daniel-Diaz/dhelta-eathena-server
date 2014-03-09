@@ -134,16 +134,16 @@ obj_char:
 	-mkdir obj_char
 
 obj_login/%.o: %.c $(LOGIN_CONVERTER_H)
-	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK -I/usr/include/mysql  -I../common -I/usr/include -DWITH_TXT -DWITH_SQL -c $(OUTPUT_OPTION) $<
+	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -DTEST_SERVER -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK -I/usr/include/mysql  -I../common -I/usr/include -DWITH_TXT -DWITH_SQL -c $(OUTPUT_OPTION) $<
 
 obj_char/%.o: %.c $(CHAR_CONVERTER_H)
-	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK -I/usr/include/mysql  -I../common -I/usr/include -DTXT_SQL_CONVERT -c $(OUTPUT_OPTION) $<
+	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -DTEST_SERVER -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK -I/usr/include/mysql  -I../common -I/usr/include -DTXT_SQL_CONVERT -c $(OUTPUT_OPTION) $<
 
 obj_char/txt-%.o: ../char/%.c $(CHAR_CONVERTER_H)
-	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK -I/usr/include/mysql  -I../common -I/usr/include -DTXT_SQL_CONVERT -c $(OUTPUT_OPTION) $<
+	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -DTEST_SERVER -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK -I/usr/include/mysql  -I../common -I/usr/include -DTXT_SQL_CONVERT -c $(OUTPUT_OPTION) $<
 
 obj_char/sql-%.o: ../char_sql/%.c $(CHAR_CONVERTER_H)
-	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK -I/usr/include/mysql  -I../common -I/usr/include -DTXT_SQL_CONVERT -c $(OUTPUT_OPTION) $<
+	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -DTEST_SERVER -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK -I/usr/include/mysql  -I../common -I/usr/include -DTXT_SQL_CONVERT -c $(OUTPUT_OPTION) $<
 
 # missing common object files
 ../common/obj_all/%.o:

@@ -9852,7 +9852,9 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 		}
 
 		// Chat logging type 'M' / Main Chat
-		log_chat(LOG_CHAT_MAINCHAT, 0, sd->status.char_id, sd->status.account_id, mapindex_id2name(sd->mapindex), sd->bl.x, sd->bl.y, NULL, message);
+                char * logmessage = message;
+                if(logmessage[0] == '|' && strlen(logmessage) > 3){logmessage += 3;}
+		log_chat(LOG_CHAT_MAINCHAT, 0, sd->status.char_id, sd->status.account_id, mapindex_id2name(sd->mapindex), sd->bl.x, sd->bl.y, NULL, logmessage);
 
 		return;
 	}
@@ -15822,7 +15824,9 @@ static int clif_parse(int fd)
 	//TODO apply delays or disconnect based on packet throughput [FlavioJS]
 	// Note: "click masters" can do 80+ clicks in 10 seconds
 
-	for( pnum = 0; pnum < 3; ++pnum )// Limit max packets per cycle to 3 (delay packet spammers) [FlavioJS]  -- This actually aids packet spammers, but stuff like /str+ gets slow without it [Ai4rei]
+	for( pnum = 0; pnum < 3; ++pnum ) 
+                     // Limit max packets per cycle to 3 (delay packet spammers) [FlavioJS]
+                     // This actually aids packet spammers, but stuff like /str+ gets slow without it [Ai4rei]
 	{ // begin main client packet processing loop
 
 	sd = (TBL_PC *)session[fd]->session_data;
@@ -15837,6 +15841,8 @@ static int clif_parse(int fd)
 			if (sd->state.active) {
 				// Player logout display [Valaris]
 				ShowInfo("%sCharacter '"CL_WHITE"%s"CL_RESET"' logged off.\n", (pc_isGM(sd))?"GM ":"", sd->status.name);
+                                char* msg = concat(sd->status.name," logged off.");
+                                irc_bot(msg);
 				clif_quitsave(fd, sd);
 			} else {
 				//Unusual logout (during log on/off/map-changer procedure)
@@ -16508,6 +16514,7 @@ static int packetdb_readdb(void)
 
 		// set the identifying cmd for the packet_db version
 		if (strcmp(str[2],"wanttoconnection")==0)
+                        printf("clif_config.connect_cmd[packet_ver] = %d\n",cmd);
 			clif_config.connect_cmd[packet_ver] = cmd;
 			
 		if(str[3]==NULL){

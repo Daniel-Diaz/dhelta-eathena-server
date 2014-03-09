@@ -1819,6 +1819,7 @@ static void char_auth_ok(int fd, struct char_session_data *sd)
 
 	// set char online on charserver
 	set_char_charselect(sd->account_id);
+        printf("Online in char server: %d\n",sd->account_id);
 
 	// continues when account data is received...
 }

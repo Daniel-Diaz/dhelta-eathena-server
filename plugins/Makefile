@@ -34,4 +34,4 @@ help:
 #####################################################################
 
 %.so: %.c $(COMMON_H)
-	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK  -I../common -I/usr/include  -L/usr/lib  -shared -o ../../plugins/$@ $<
+	gcc -DHAVE_CONFIG_H -g -O2 -pipe -ffast-math -Wall -Wno-sign-compare -DTEST_SERVER -Wno-unused-parameter -Wno-pointer-sign -Wno-switch -fPIC -fno-strict-aliasing -Wno-unused -Wno-parentheses -DHAVE_MONOTONIC_CLOCK  -I../common -I/usr/include  -L/usr/lib  -shared -o ../../plugins/$@ $<

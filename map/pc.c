@@ -1037,6 +1037,9 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 			" Packet Ver: '"CL_WHITE"%d"CL_RESET"', IP: '"CL_WHITE"%d.%d.%d.%d"CL_RESET"').\n",
 			sd->status.name, sd->status.account_id, sd->status.char_id,
 			sd->packet_ver, CONVIP(ip));
+        // DheltaRO log in notification
+        char* msg = concat(sd->status.name," logged in.");
+        irc_bot(msg);
 	
 	// Send friends list
 	clif_friendslist_send(sd);
