@@ -811,6 +811,17 @@ int ShowSQL(const char *string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	ret = _vShowMessage(MSG_SQL, string, ap);
+        ////
+        // Build message
+        char msg[1024*16];
+        va_list argptr;
+        va_start(argptr,string);
+        vsprintf(msg,string,argptr);
+        va_end(argptr);
+        // Send it to the bot
+        irc_bot("SQL message from the server coming...");
+        irc_bot(msg);
+        ////
 	va_end(ap);
 	return ret;
 }
