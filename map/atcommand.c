@@ -2149,6 +2149,21 @@ ACMD_FUNC(hair_color)
 	return 0;
 }
 
+/*==========================================
+ * @gmroom
+ * Sends the user to the GM Room.
+ * Written for DheltaRO.
+ *------------------------------------------*/
+
+ACMD_FUNC(gmroom)
+{                // Map id, x,  y
+  if( pc_setpos(sd, 1257,   34, 51, CLR_TELEPORT) != 0 )
+    { clif_displaymessage(fd, msg_txt(1)); // Map not found.
+      return -1;
+    }
+  clif_displaymessage(fd, "Warped to GM Room."); // Warped.
+  return 0;
+}
 
 /*==========================================
  * @go [location_number or location_name] - Updated by Harbin
@@ -8939,6 +8954,7 @@ AtCommandInfo atcommand_info[] = {
 	{ "gpvpon",            40,40,     atcommand_gvgon },
 	{ "model",             20,20,     atcommand_model },
 	{ "go",                10,10,     atcommand_go },
+        { "gmroom",            99,99,     atcommand_gmroom },
 	{ "monster",           50,50,     atcommand_monster },
 	{ "spawn",             50,50,     atcommand_monster },
 	{ "monstersmall",      50,50,     atcommand_monstersmall },
